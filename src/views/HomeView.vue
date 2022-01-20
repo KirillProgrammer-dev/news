@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-row dense>
         <v-col 
-          v-for="i in news.length"
+          v-for="(item, i) in news.length"
           :key="i">
           <NewsCard :news="news[i]" />
         </v-col>
@@ -13,8 +13,7 @@
 </template>
 
 <script>
-import NewsCard from "../components/NewsCard.vue"
-
+import NewsCard from "../components/NewsCard.vue";
 
 export default {
   name: "HomeView",
@@ -22,25 +21,44 @@ export default {
     NewsCard
   },
   data: () => ({
-    news: [
-      
-    ]
+    news: []
   }),
   mounted() {
-    this.axios.get("https://newsapi.org/v2/top-headlines?country=ru&apiKey=d7f41a32c26b4bbfb596d58b1a54c766").then((news) => {
-      for(let i in news.data.articles){
-        this.news.push(news.data.articles[i])
-      }
-      for(let i in this.news){
-        let item = this.news[i]
-        try{
-          if (item.urlToImage == null || item.title == null || item.description == null || item.url == null){
-            this.news.splice(i, i)
+    this.axios
+      .get(
+        "https://newsapi.org/v2/top-headlines?country=ru&apiKey=d7f41a32c26b4bbfb596d58b1a54c766"
+      )
+      .then(news => {
+        for (let item of news.data.articles) {
+          if (
+            item.urlToImage != null &&
+            item.title != null &&
+            item.description != null &&
+            item.url != null
+          ) {
+            this.news.push(item);
           }
         }
-        catch(e){this.news.splice(i, i)}
-      }
-    });
+      });
   },
+  beforeRouteUpdate(to) {
+    this.axios
+      .get(
+        "https://newsapi.org/v2/top-headlines?country=ru&apiKey=d7f41a32c26b4bbfb596d58b1a54c766&q=" +
+          to
+      )
+      .then(news => {
+        for (let item of news.data.articles) {
+          if (
+            item.urlToImage != null &&
+            item.title != null &&
+            item.description != null &&
+            item.url != null
+          ) {
+            this.news.push(item);
+          }
+        }
+      });
+  }
 };
 </script>

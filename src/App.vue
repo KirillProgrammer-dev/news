@@ -13,7 +13,7 @@
           <v-btn to="/german"> Немецкие новости </v-btn>
         </v-col>
         <v-col>
-          <v-text-field keydown="search(this.value)">
+          <v-text-field @input="search">
             <v-icon
               slot="append"
               color="white"
@@ -61,23 +61,23 @@
 <script>
 export default {
   name: "App",
-  data: () =>({
+  data: () => ({
     width: window.innerWidth,
     drawer: false,
-    group: null,
+    group: null
   }),
-  methods:{
+  methods: {
     search(value) {
-      console.log(value)
-      this.$router.push('home?q=1')
+      console.log(value);
+      this.$router.push(document.location.pathname + "?q=" + value);
     },
 
     updateWidth() {
       this.width = window.innerWidth;
-    },
+    }
   },
   created() {
-      window.addEventListener('resize', this.updateWidth);
-    }
+    window.addEventListener("resize", this.updateWidth);
+  }
 };
 </script>
