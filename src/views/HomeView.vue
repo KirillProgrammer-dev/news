@@ -45,9 +45,11 @@ export default {
     this.axios
       .get(
         "https://newsapi.org/v2/top-headlines?country=ru&apiKey=d7f41a32c26b4bbfb596d58b1a54c766&q=" +
-          to
+          to.query.q
       )
       .then(news => {
+        this.news = []
+        console.log(news)
         for (let item of news.data.articles) {
           if (
             item.urlToImage != null &&

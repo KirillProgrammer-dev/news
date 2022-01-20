@@ -4,7 +4,7 @@
       <v-row align="center" class="justify-center">
         <!-- Ссылки для роутера -->
         <v-col>
-          <v-btn to="/"> Русские новости </v-btn>
+          <v-btn to="/russian"> Русские новости </v-btn>
         </v-col>
         <v-col>
           <v-btn to="/french"> Французские новости </v-btn>
@@ -35,19 +35,19 @@
             <v-list-item-icon>
               <v-icon>mdi-flag</v-icon>
             </v-list-item-icon>
-            <v-list-item-title><v-btn plain to="/"> Российские новости </v-btn></v-list-item-title>
+            <v-list-item-title><v-btn plain to="/russian"> Российские новости </v-btn></v-list-item-title>
           </v-list-item>
           <v-list-item>
           <v-list-item-icon>
             <v-icon>mdi-flag</v-icon>
           </v-list-item-icon>
-          <v-list-item-title to="/french"><v-btn plain to="/french"> Французские новости </v-btn></v-list-item-title>
+          <v-list-item-title><v-btn plain to="/french"> Французские новости </v-btn></v-list-item-title>
         </v-list-item>
           <v-list-item>
           <v-list-item-icon>
             <v-icon>mdi-flag</v-icon>
           </v-list-item-icon>
-          <v-list-item-title to="/german"><v-btn plain to="/german"> Немецкие новости </v-btn></v-list-item-title>
+          <v-list-item-title><v-btn plain to="/german"> Немецкие новости </v-btn></v-list-item-title>
         </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -68,8 +68,7 @@ export default {
   }),
   methods: {
     search(value) {
-      console.log(value);
-      this.$router.push(document.location.pathname + "?q=" + value);
+      this.$router.replace({path: this.$router.currentRoute.path, query:{q: value}});
     },
 
     updateWidth() {

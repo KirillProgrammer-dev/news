@@ -26,7 +26,7 @@ export default {
   mounted() {
     this.axios
       .get(
-        "https://newsapi.org/v2/top-headlines?country=ru&apiKey=d7f41a32c26b4bbfb596d58b1a54c766"
+        "https://newsapi.org/v2/top-headlines?country=de&apiKey=d7f41a32c26b4bbfb596d58b1a54c766"
       )
       .then(news => {
         for (let item of news.data.articles) {

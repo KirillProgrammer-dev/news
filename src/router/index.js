@@ -7,8 +7,8 @@ import GermanView from "../views/GermanView.vue";
 Vue.use(VueRouter);
 
 const routes = [{
-        path: "/",
-        name: "home",
+        path: "/russian",
+        name: "russian",
         component: HomeView,
     },
     {
