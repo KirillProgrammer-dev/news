@@ -5,6 +5,7 @@
   >
     <v-img
       :src="news.urlToImage"
+      :lazy-src="lazy_src"
       height="200px"
     ></v-img>
 
@@ -34,6 +35,9 @@
 <script>
 export default {
     name: "NewsCard",
+    data: () => ({
+        lazy_src: "https://xn----7sbbaj8bef8aij.xn--p1ai/image/cache/data/0000/bumaga-paperline-seraya-160-gr-700x700.png"
+    }),
     props:{
       news: Object
     }
