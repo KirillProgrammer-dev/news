@@ -40,6 +40,27 @@ export default {
           }
         }
       });
+  },
+  beforeRouteUpdate(to) {
+    this.axios
+      .get(
+        "https://newsapi.org/v2/top-headlines?country=fr&apiKey=d7f41a32c26b4bbfb596d58b1a54c766&q=" +
+          to.query.q
+      )
+      .then(news => {
+        this.news = []
+        console.log(news)
+        for (let item of news.data.articles) {
+          if (
+            item.urlToImage != null &&
+            item.title != null &&
+            item.description != null &&
+            item.url != null
+          ) {
+            this.news.push(item);
+          }
+        }
+      });
   }
 };
 </script>
